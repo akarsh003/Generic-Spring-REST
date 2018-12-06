@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.projection.ProjectionFactory;
+import org.springframework.hateoas.Resource;
 //import org.springframework.data.web.PagedResourcesAssembler;
 //import org.springframework.hateoas.MediaTypes;
 //import org.springframework.hateoas.PagedResources;
@@ -20,15 +22,17 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.employee.EmployeeController;
+import com.example.demo.model.Department;
 //import com.example.demo.department.InlineRecordsDepartment;
 //import com.example.demo.employee.InlineRecordsEmployee;
 import com.example.demo.model.Employee;
-import com.google.common.collect.Maps;
+//import com.google.common.collect.Maps;
 
 ////import com.example.demo.model.Department;
 //
@@ -65,22 +69,25 @@ public abstract class GenericController<T, ID extends Serializable> {
     
     
     @RequestMapping(method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
-    public @ResponseBody Map<String, Object> create(@RequestBody T json) {
+    public @ResponseBody T create(@RequestBody T json) {
 
         T created = this.repo.save(json);
 
-        Map<String, Object> m = Maps.newHashMap();
-        m.put("success", true);
-        m.put("created", created);
-        return m;
+//        Map<String, Object> m = Maps.newHashMap();
+//        m.put("success", true);
+//        m.put("created", created);
+        return created;
     }
+    
+    
+
    
     
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    public @ResponseBody Map<String, Object> delete(@PathVariable ID id) {
+    public @ResponseBody String delete(@PathVariable ID id) {
         this.repo.deleteById(id);
-        Map<String, Object> m = Maps.newHashMap();
-        m.put("success", true);
-        return m;
+//        Map<String, Object> m = Maps.newHashMap();
+//        m.put("success", true);
+        return "Successs";
     }
 }
