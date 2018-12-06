@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.employee.EmployeeController;
-import com.example.demo.department.InlineRecordsDepartment;
-import com.example.demo.employee.InlineRecordsEmployee;
+//import com.example.demo.department.InlineRecordsDepartment;
+//import com.example.demo.employee.InlineRecordsEmployee;
 import com.example.demo.model.Employee;
 
 ////import com.example.demo.model.Department;
