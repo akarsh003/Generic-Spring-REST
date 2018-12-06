@@ -6,6 +6,10 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -14,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.hateoas.Resource;
+import org.springframework.http.HttpStatus;
 //import org.springframework.data.web.PagedResourcesAssembler;
 //import org.springframework.hateoas.MediaTypes;
 //import org.springframework.hateoas.PagedResources;
@@ -23,6 +28,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -79,9 +85,54 @@ public abstract class GenericController<T, ID extends Serializable> {
         return created;
     }
     
-    
+//    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+//	Optional<?> replace(@PathVariable ID id) {
+//
+////    	T x=this.get(id);
+//    	Optional<T> x= this.repo.findById(id);
+//
+//    	
+//		return this.repo.findById(id)
+//			.map(T -> {
+//				T.setid(newT.getDeptid());
+//				/*Department.setDeptname(newDepartment.getDeptname());
+//				Department.setId(newDepartment.getId());*/
+//				
+//				return this.repo.save(T);
+//			});
+//			
+//	}
 
    
+//    @RequestMapping(value = "/{id}",
+//            method = RequestMethod.PUT,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//       
+//        public Object update(@PathVariable ID id, @Valid @RequestBody T dto) throws URISyntaxException {
+//            return Optional.ofNullable(this.repo.findById(id))
+//                .map(obj -> {
+//                    T updatedEntity = this.repo.save(mapper.updateDomain(obj, dto));
+//                    return new ResponseEntity<>(mapper.fromDomain(updatedEntity), HttpStatus.OK);
+//                })
+//                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//        }
+
+    
+    @RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody T update(@PathVariable ID id, @RequestBody T json) {
+       
+        T entity = (T) this.repo.findById(id);
+        
+            BeanUtils.copyProperties(entity, json);
+        
+        T updated = this.repo.save( entity);
+
+//        Map<String, Object> m = Maps.newHashMap();
+//        m.put("success", true);
+//        m.put("id", id);
+//        m.put("updated", updated);
+        return updated;
+    }
     
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
     public @ResponseBody String delete(@PathVariable ID id) {
