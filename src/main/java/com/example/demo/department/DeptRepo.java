@@ -19,13 +19,13 @@ import com.example.demo.model.Employee;
 
 
 @CrossOrigin()
-@RepositoryRestResource(exported=false/*,excerptProjection = InlineRecordsDepartment.class*/)
+//@RepositoryRestResource(exported=false/*,excerptProjection = InlineRecordsDepartment.class*/)
 public interface DeptRepo extends JpaRepository<Department, Integer> {
 
 	
-	@RestResource()
+//	@RestResource()
 	public Page<Department> findByid(int id,Pageable pageable);
-	@RestResource()
+//	@RestResource()
 	public Page<Department> findAll(Pageable pageable);
 //	public int findDeptId();
 	

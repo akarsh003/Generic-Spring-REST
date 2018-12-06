@@ -22,7 +22,7 @@ import com.example.demo.model.Employee;
 
 
 @CrossOrigin()
-@RepositoryRestResource(exported=false/*excerptProjection = InlineRecordsEmployee.class*/)
+//@RepositoryRestResource(exported=false/*excerptProjection = InlineRecordsEmployee.class*/)
 public interface EmplRepo extends JpaRepository<Employee, Integer> {
 
 //	
@@ -37,11 +37,11 @@ public interface EmplRepo extends JpaRepository<Employee, Integer> {
 //		public List<Employee> findById(int id);
 	
 //		Page<Employee> findByE(@Param("code")String code,Pageable pageable);
-		@RestResource
+//		@RestResource
 		public Page<Employee> findAll(Pageable page);
-		@RestResource
+//		@RestResource
 		public Page<Employee> findByname(String name,Pageable pageable);
-		@RestResource
+//		@RestResource
 		Page<Employee> findAll(Specification spec,Pageable pageable);
 
 		public Page<Employee> findById(int id, Pageable pageable);
