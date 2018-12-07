@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 //import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import com.example.demo.common.ApplicationRepository;
+import com.example.demo.model.Department;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,30 +23,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.example.demo.model.Employee;
 
 
-@CrossOrigin()
-//@RepositoryRestResource(exported=false/*excerptProjection = InlineRecordsEmployee.class*/)
-public interface EmplRepo<T> extends JpaRepository<T, Integer> {
 
-//	
-//	public Employee findBydeptid(int id);
-//
-//	public List<Employee> findById(Employee employee);
-
-//		@RestResource
-//		public Page<Employee> findBydeptid(int id,Pageable pageable);
-//		@RestResource
-//		public Page<Employee> findById(Employee employee,Pageable pageable);
-//		public List<Employee> findById(int id);
-	
-//		Page<Employee> findByE(@Param("code")String code,Pageable pageable);
-//		@RestResource
-		public Page<T> findAll(Pageable page);
-//		@RestResource
-//		public Page<T> findByname(String name,Pageable pageable);
-//		@RestResource
-		Page<T> findAll(Specification spec,Pageable pageable);
-
-//		public Page<T> findById(int id, Pageable pageable);
-		
+interface EmployeeRepo extends ApplicationRepository<Employee, Integer> {
 	
 }
