@@ -17,13 +17,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 //import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.ApplicationRepository;
 //import com.example.demo.model.Department;
 import com.example.demo.model.Employee;
 
 
 @CrossOrigin()
 //@RepositoryRestResource(exported=false/*excerptProjection = InlineRecordsEmployee.class*/)
-public interface EmplRepo<T> extends JpaRepository<T, Integer> {
+public interface EmplRepo extends ApplicationRepository<Employee, Integer> {
 
 //	
 //	public Employee findBydeptid(int id);
@@ -38,11 +39,11 @@ public interface EmplRepo<T> extends JpaRepository<T, Integer> {
 	
 //		Page<Employee> findByE(@Param("code")String code,Pageable pageable);
 //		@RestResource
-		public Page<T> findAll(Pageable page);
+//		public Page<Employee> findAll(Pageable page);
 //		@RestResource
 //		public Page<T> findByname(String name,Pageable pageable);
 //		@RestResource
-		Page<T> findAll(Specification spec,Pageable pageable);
+//		Page<Employee> findAll(Specification spec,Pageable pageable);
 
 //		public Page<T> findById(int id, Pageable pageable);
 		
