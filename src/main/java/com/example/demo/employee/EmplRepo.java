@@ -23,7 +23,7 @@ import com.example.demo.model.Employee;
 
 @CrossOrigin()
 //@RepositoryRestResource(exported=false/*excerptProjection = InlineRecordsEmployee.class*/)
-public interface EmplRepo extends JpaRepository<Employee, Integer> {
+public interface EmplRepo<T> extends JpaRepository<T, Integer> {
 
 //	
 //	public Employee findBydeptid(int id);
@@ -38,13 +38,13 @@ public interface EmplRepo extends JpaRepository<Employee, Integer> {
 	
 //		Page<Employee> findByE(@Param("code")String code,Pageable pageable);
 //		@RestResource
-		public Page<Employee> findAll(Pageable page);
+		public Page<T> findAll(Pageable page);
 //		@RestResource
-		public Page<Employee> findByname(String name,Pageable pageable);
+//		public Page<T> findByname(String name,Pageable pageable);
 //		@RestResource
-		Page<Employee> findAll(Specification spec,Pageable pageable);
+		Page<T> findAll(Specification spec,Pageable pageable);
 
-		public Page<Employee> findById(int id, Pageable pageable);
+//		public Page<T> findById(int id, Pageable pageable);
 		
 	
 }
