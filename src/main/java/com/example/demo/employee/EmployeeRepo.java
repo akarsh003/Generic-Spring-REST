@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 //import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import com.example.demo.common.ApplicationRepository;
+import com.example.demo.model.Department;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,6 +24,7 @@ import com.example.demo.ApplicationRepository;
 import com.example.demo.model.Employee;
 
 
+<<<<<<< HEAD:src/main/java/com/example/demo/employee/EmplRepo.java
 @CrossOrigin()
 //@RepositoryRestResource(exported=false/*excerptProjection = InlineRecordsEmployee.class*/)
 public interface EmplRepo extends ApplicationRepository<Employee, Integer> {
@@ -47,5 +50,9 @@ public interface EmplRepo extends ApplicationRepository<Employee, Integer> {
 
 //		public Page<T> findById(int id, Pageable pageable);
 		
+=======
+
+interface EmployeeRepo extends ApplicationRepository<Employee, Integer> {
+>>>>>>> d292bf44e661625dd603eaf69c8432598a4095da:src/main/java/com/example/demo/employee/EmployeeRepo.java
 	
 }

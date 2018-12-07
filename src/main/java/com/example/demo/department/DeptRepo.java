@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 //import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import com.example.demo.common.ApplicationRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,10 +22,11 @@ import com.example.demo.model.Employee;
 
 
 
-@CrossOrigin()
+
 //@RepositoryRestResource(exported=false/*,excerptProjection = InlineRecordsDepartment.class*/)
 public interface DeptRepo extends ApplicationRepository<Department, Integer> {
 
+<<<<<<< HEAD
 	public Department findById(int id);
 	
 //	@RestResource()
@@ -36,6 +38,9 @@ public interface DeptRepo extends ApplicationRepository<Department, Integer> {
 //	public int findDeptId();
 	
 //	Department findByEmployee(int id);
+=======
+
+>>>>>>> d292bf44e661625dd603eaf69c8432598a4095da
 }
 
 
