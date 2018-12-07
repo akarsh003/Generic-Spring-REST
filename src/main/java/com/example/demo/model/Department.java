@@ -31,9 +31,19 @@ public class Department {
 	 @JoinColumn(name="id",nullable=true)
 //	 @JsonManagedReference
 //	 @JsonIgnore
-	 private Employee id;
+	 private Employee depthead;
 	 
 	 
+	public Employee getDepthead() {
+		return depthead;
+	}
+
+
+	public void setDepthead(Employee depthead) {
+		this.depthead = depthead;
+	}
+
+
 	public int getDeptid() {
 		return deptid;
 	}
@@ -44,14 +54,6 @@ public class Department {
 	}
 
 	
-
-	public Employee getId() {
-		return id;
-	}
-
-	public void setId(Employee id) {
-		this.id = id;
-	}
 
 	public String getDeptname() {
 		return deptname;
