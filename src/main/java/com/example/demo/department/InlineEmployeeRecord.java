@@ -1,4 +1,4 @@
-package com.example.demo.employee;
+package com.example.demo.department;
 
 import java.util.Date;
 

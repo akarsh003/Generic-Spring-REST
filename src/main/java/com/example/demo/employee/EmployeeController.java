@@ -44,7 +44,7 @@ public class EmployeeController extends GenericController<Employee, Integer> {
 	static final String URI = "/employee";
 
 	@Autowired
-	public EmployeeController(EmplRepo repo) {
+	public EmployeeController(EmployeeRepo repo) {
 		super(URI, repo);
 	}
 

@@ -21,10 +21,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 //@Data
 @Entity
 public class Department {
- 
+
+	public static final int DEFAULT_DEPT_ID=-1;
 	 @Id
 	 @GeneratedValue 
-	 private int deptid;
+	 private int deptid=DEFAULT_DEPT_ID;
 	 private String deptname;
 	 
 	 @OneToOne

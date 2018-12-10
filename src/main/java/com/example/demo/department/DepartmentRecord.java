@@ -2,7 +2,6 @@ package com.example.demo.department;
 
 import org.springframework.data.rest.core.config.Projection;
 
-import com.example.demo.employee.InlineEmployeeRecord;
 import com.example.demo.model.Department;
 import com.example.demo.model.Employee;
 
