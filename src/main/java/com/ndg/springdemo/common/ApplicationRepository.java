@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin()
+
 @NoRepositoryBean
 public interface ApplicationRepository<T, ID> extends JpaRepository<T, ID>, JpaSpecificationExecutor {
 

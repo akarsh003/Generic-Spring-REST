@@ -22,15 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ndg.springdemo.common.ApplicationRepository;
 import com.ndg.springdemo.common.GenericController;
 import com.ndg.springdemo.model.Department;
-import com.ndg.springdemo.model.Employee;
 
 @CrossOrigin()
 @RestController
 @RequestMapping(DepartmentController.URI)
 public class DepartmentController extends GenericController<Department, Integer> {
 
-	@Autowired
-	private DeptRepo repository;
 	@Autowired
 	private ProjectionFactory factory;
 

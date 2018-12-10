@@ -15,12 +15,6 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 import java.util.function.Function;
 
-//import org.springframework.data.web.PagedResourcesAssembler;
-//import org.springframework.hateoas.MediaTypes;
-//import org.springframework.hateoas.PagedResources;
-//import org.springframework.hateoas.Resource;
-//import com.example.demo.department.InlineRecordsDepartment;
-//import com.example.demo.employee.InlineRecordsEmployee;
 
 
 public abstract class GenericController<T, ID extends Serializable> {

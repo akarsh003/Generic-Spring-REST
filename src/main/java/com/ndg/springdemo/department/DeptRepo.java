@@ -4,7 +4,7 @@ import com.ndg.springdemo.common.ApplicationRepository;
 import com.ndg.springdemo.model.Department;
 
 
-public interface DeptRepo extends ApplicationRepository<Department, Integer> {
+interface DeptRepo extends ApplicationRepository<Department, Integer> {
 
 	
 }
