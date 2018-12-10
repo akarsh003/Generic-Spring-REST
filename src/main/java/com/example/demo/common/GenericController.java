@@ -120,8 +120,8 @@ public abstract class GenericController<T, ID extends Serializable> {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    protected ResponseEntity<Page<T>> listResponse(Page<T> allImpl, Pageable pageable, String search) {
+    protected < ResultType > ResponseEntity<Page<ResultType>> listResponse(Page<ResultType> allImpl, Pageable pageable, String search) {
         log.debug("REST List request on {} with pageable params {} and search {} ", baseUri , pageable, search);
-        return new ResponseEntity<>(allImpl, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(allImpl, HttpStatus.OK);
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 
 @Configuration
-class SomeConfig {
+class ControllerProjectionSupportConfig {
 
   @Bean
   public SpelAwareProxyProjectionFactory projectionFactory() {

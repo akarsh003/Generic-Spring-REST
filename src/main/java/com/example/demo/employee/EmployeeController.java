@@ -1,7 +1,7 @@
 package com.example.demo.employee;
 
 import com.example.demo.department.DeptRepo;
-import com.example.demo.department.InlineRecordsDepartment;
+import com.example.demo.department.DepartmentRecord;
 import com.example.demo.model.Department;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,123 +37,55 @@ import com.example.demo.model.Employee;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-
-
 @RequestMapping(EmployeeController.URI)
 @RestController
-//@RequestMapping("/employee")
-public class EmployeeController extends GenericController<Employee,Integer>{
+public class EmployeeController extends GenericController<Employee, Integer> {
 
-//	Calling generic controller by passing employee repository
-    static final String URI = "/employee";
-    @Autowired
-    public EmployeeController(EmplRepo repo) {
-        super(URI, repo);
-     }
-    @Autowired
-	private ProjectionFactory factory;
+	static final String URI = "/employee";
+
 	@Autowired
-	private PagedResourcesAssembler<InlineRecordsEmployee> assembleremployee;
-//	@Autowired
-//	public EmployeeController(EmplRepo repo) {
-//		super(repo);
-//	}
+	public EmployeeController(EmplRepo repo) {
+		super(URI, repo);
+	}
 
-    @RequestMapping
-    public ResponseEntity<PagedResources<Resource<InlineRecordsEmployee>>> all(Pageable pageable, @RequestParam(value = "search", required = false) String search) {
-//        return super.listResponse(super.allImpl(pageable, search), pageable, search);
-    	
-    	Page<Employee> x= super.allImpl(pageable, search);
+	@Autowired
+	private ProjectionFactory factory;
 
-    	Page<InlineRecordsEmployee> projected =  x.map(l -> factory.createProjection(InlineRecordsEmployee.class, l));
-          PagedResources<Resource<InlineRecordsEmployee>> resources = assembleremployee.toResource(projected);
-          return ResponseEntity.ok(resources);
-    }
-    
-    
-     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    protected ResponseEntity<Employee> get(@PathVariable Integer id) {
-        return super.respondToGet(id, super.getImpl(id));
-    }
-     
-     
-     @RequestMapping(method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    protected ResponseEntity<Employee> create(@RequestBody Employee employee) throws URISyntaxException {
-    	 
-        if (employee.getId() != 0) {
-            return super.cannotCreateEntityWithKey();
-        }
-        Employee result = super.createImpl(employee);
-        return super.created(result.getId(),result);
-     }
-     
-     
-     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
-     protected ResponseEntity<Employee> update(@PathVariable Integer id,@RequestBody Employee employee) {
-         return super.getImpl(id)
-                 .map(oldEmployee -> {
-                     Employee updatedEntity = super.updateImpl(oldEmployee, employee);
-                     return super.updated(id, updatedEntity);
-                 })
-                 .orElse(super.updateNotFound(id));
-     }
+	@RequestMapping
+	public ResponseEntity<Page<EmployeeRecord>> all(Pageable pageable,
+			@RequestParam(value = "search", required = false) String search) {
 
-     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-     protected ResponseEntity<Employee>  delete(@PathVariable Integer id) {
-         super.deleteImpl(id);
-         return super.noContent(id);
-     }
+		Page<Employee> x = super.allImpl(pageable, search);
+		Page<EmployeeRecord> projected = x.map(l -> factory.createProjection(EmployeeRecord.class, l));
+		return super.listResponse(projected, pageable, search);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	protected ResponseEntity<Employee> get(@PathVariable Integer id) {
+		return super.respondToGet(id, super.getImpl(id));
+	}
+
+	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	protected ResponseEntity<Employee> create(@RequestBody Employee employee) throws URISyntaxException {
+
+		if (employee.getId() != 0) {
+			return super.cannotCreateEntityWithKey();
+		}
+		Employee result = super.createImpl(employee);
+		return super.created(result.getId(), result);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	protected ResponseEntity<Employee> update(@PathVariable Integer id, @RequestBody Employee employee) {
+		return super.getImpl(id).map(oldEmployee -> {
+			Employee updatedEntity = super.updateImpl(oldEmployee, employee);
+			return super.updated(id, updatedEntity);
+		}).orElse(super.updateNotFound(id));
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	protected ResponseEntity<Employee> delete(@PathVariable Integer id) {
+		super.deleteImpl(id);
+		return super.noContent(id);
+	}
 }
-
-//@RequestMapping(EmployeeController.URI)
-//@CrossOrigin()
-//public class EmployeeController extends GenericController<Employee, Integer> {
-//
-//
-//    static final String URI = "/api/employee";
-//
-//    //Calling generic controller by passing department repository
-//
-//    @Autowired
-//    public EmployeeController(EmployeeRepo repo) {
-//        super(URI, repo);
-//
-//    }
-//
-//    @RequestMapping
-//    public ResponseEntity<Page<Employee>> all(Pageable pageable, @RequestParam(value = "search", required = false) String search) {
-//        return super.listResponse(super.allImpl(pageable, search), pageable, search);
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    protected ResponseEntity<Employee> get(Integer id) {
-//        return super.respondToGet(id, super.getImpl(id));
-//    }
-//
-//    @RequestMapping(method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-//    protected ResponseEntity<Employee> create(Employee employee) throws URISyntaxException {
-//        if (employee.getId() != 0) {
-//            return super.cannotCreateEntityWithKey();
-//        }
-//        Employee result = super.createImpl(employee);
-//        return super.created(result.getId(),result);
-//
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
-//    protected ResponseEntity<Employee> update(Integer id, Employee employee) {
-//        return super.getImpl(id)
-//                .map(oldEmployee -> {
-//                    Employee updatedEntity = super.updateImpl(oldEmployee, employee);
-//                    return super.updated(id, updatedEntity);
-//                })
-//                .orElse(super.updateNotFound(id));
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    protected ResponseEntity<Employee>  delete(Integer id) {
-//        super.deleteImpl(id);
-//        return super.noContent(id);
-//    }
-//>>>>>>> d292bf44e661625dd603eaf69c8432598a4095da
-//}
