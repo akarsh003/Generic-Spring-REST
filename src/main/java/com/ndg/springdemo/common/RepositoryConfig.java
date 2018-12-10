@@ -1,3 +1,4 @@
+package com.ndg.springdemo.common;
 //package com.example.demo.common;
 //
 //import org.springframework.context.annotation.Configuration;

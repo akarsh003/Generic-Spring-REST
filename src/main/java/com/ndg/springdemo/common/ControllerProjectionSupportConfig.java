@@ -1,4 +1,4 @@
-package com.example.demo.common;
+package com.ndg.springdemo.common;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

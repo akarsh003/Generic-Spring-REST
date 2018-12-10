@@ -1,8 +1,5 @@
-package com.example.demo.employee;
+package com.ndg.springdemo.employee;
 
-import com.example.demo.department.DeptRepo;
-import com.example.demo.department.DepartmentRecord;
-import com.example.demo.model.Department;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +16,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.ndg.springdemo.common.GenericController;
+import com.ndg.springdemo.department.DepartmentRecord;
+import com.ndg.springdemo.department.DeptRepo;
+import com.ndg.springdemo.model.Department;
+import com.ndg.springdemo.model.Employee;
+
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -30,9 +33,6 @@ import org.springframework.web.bind.annotation.*;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.common.GenericController;
-import com.example.demo.model.Employee;
 
 import java.net.URISyntaxException;
 import java.util.Optional;

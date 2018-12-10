@@ -1,11 +1,11 @@
-package com.example.demo.employee;
+package com.ndg.springdemo.employee;
 
 import java.util.Date;
 
 import org.springframework.data.rest.core.config.Projection;
 
-import com.example.demo.department.DepartmentRecord;
-import com.example.demo.model.Employee;
+import com.ndg.springdemo.department.DepartmentRecord;
+import com.ndg.springdemo.model.Employee;
 
 @Projection(name = "employeeRecord", types = { Employee.class }) //FOR EMPLOYEE
 public interface EmployeeRecord{

@@ -1,4 +1,4 @@
-package com.example.demo.common;
+package com.ndg.springdemo.common;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.example.demo.model.*;
+import com.ndg.springdemo.model.*;
 class GenericSpecificationBuilder<U> {
 
     private final List<SpecSearchCriteria> params;

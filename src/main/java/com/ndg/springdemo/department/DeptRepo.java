@@ -1,13 +1,7 @@
-package com.example.demo.department;
+package com.ndg.springdemo.department;
 
-//import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import com.example.demo.common.ApplicationRepository;
-//import org.springframework.data.repository.query.Param;
-//import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-//import org.springframework.data.rest.core.annotation.RestResource;
-//import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.demo.model.Department;
+import com.ndg.springdemo.common.ApplicationRepository;
+import com.ndg.springdemo.model.Department;
 
 
 //@RepositoryRestResource(exported=false/*,excerptProjection = InlineRecordsDepartment.class*/)

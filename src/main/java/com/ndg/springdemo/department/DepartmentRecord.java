@@ -1,9 +1,9 @@
-package com.example.demo.department;
+package com.ndg.springdemo.department;
 
 import org.springframework.data.rest.core.config.Projection;
 
-import com.example.demo.model.Department;
-import com.example.demo.model.Employee;
+import com.ndg.springdemo.model.Department;
+import com.ndg.springdemo.model.Employee;
 
 @Projection(name = "departmentRecord", types = { Department.class })// THIS IS FOR DEPARTMENT
 public interface DepartmentRecord {

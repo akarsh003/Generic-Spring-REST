@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.ndg.springdemo.model;
 
 import java.util.HashSet;
 //import lombok.Data;

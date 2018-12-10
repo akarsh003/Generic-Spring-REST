@@ -1,4 +1,4 @@
-package com.example.demo.common;
+package com.ndg.springdemo.common;
 
 public class SpecSearchCriteria {
 

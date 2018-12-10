@@ -1,4 +1,4 @@
-package com.example.demo.department;
+package com.ndg.springdemo.department;
 
 import java.net.URISyntaxException;
 
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.common.ApplicationRepository;
-import com.example.demo.common.GenericController;
-import com.example.demo.model.Department;
+import com.ndg.springdemo.common.ApplicationRepository;
+import com.ndg.springdemo.common.GenericController;
+import com.ndg.springdemo.model.Department;
 
 
 @RestController
