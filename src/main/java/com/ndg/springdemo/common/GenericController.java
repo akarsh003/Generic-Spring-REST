@@ -67,7 +67,7 @@ public abstract class GenericController<T, ID extends Serializable> {
     }
 
     protected T updateImpl(T oldObj, T newObj) {
-        BeanUtils.copyProperties(oldObj, newObj);
+        BeanUtils.copyProperties(newObj, oldObj, "id");
         T updated = this.repo.save(oldObj);
         return updated;
     }
