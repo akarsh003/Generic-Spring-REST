@@ -51,7 +51,7 @@ public class EmployeeController extends GenericController<Employee, Integer> {
 	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	protected ResponseEntity<Employee> create(@RequestBody Employee employee) throws URISyntaxException {
 
-		if (employee.getId() != 0) {
+		if (employee.getId() != Employee.DEFAULT_ID) {
 			return super.cannotCreateEntityWithKey();
 		}
 		Employee result = super.createImpl(employee);

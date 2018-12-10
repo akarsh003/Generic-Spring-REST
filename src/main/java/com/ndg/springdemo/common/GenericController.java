@@ -84,7 +84,7 @@ public abstract class GenericController<T, ID extends Serializable> {
         return true;
     }
 
-    protected ResponseEntity<T> respondToGet(ID id, Optional<T> result) {
+    protected <ResponseType> ResponseEntity<ResponseType> respondToGet(ID id, Optional<ResponseType> result) {
         log.debug("REST get request on {} returned {}", baseUri + "/" + id.toString(), result);
         return result.map(obj ->
                 new ResponseEntity<>(

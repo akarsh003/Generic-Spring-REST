@@ -21,10 +21,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 public class Employee {
+	public static final int DEFAULT_ID=-1;
 
 	   @Id
 	   @GeneratedValue
-	   private int id;
+	   private int id = DEFAULT_ID;
 	   private String name;
 	   private String skill,desg;
 	   private float salary;
