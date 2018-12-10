@@ -51,6 +51,7 @@ public abstract class GenericController<T, ID extends Serializable> {
     }
 
     protected Page<T> allImpl(Pageable pageable, String search) {
+    	
         if (search != null && !search.isEmpty()) {
             Specification<T> spec = resolveSpecificationFromInfixExpr(search);
             Page<T> data = repo.findAll(spec, pageable);

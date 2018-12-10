@@ -19,12 +19,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 //import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.ApplicationRepository;
 //import com.example.demo.model.Department;
 import com.example.demo.model.Employee;
 
 
-<<<<<<< HEAD:src/main/java/com/example/demo/employee/EmplRepo.java
 @CrossOrigin()
 //@RepositoryRestResource(exported=false/*excerptProjection = InlineRecordsEmployee.class*/)
 public interface EmplRepo extends ApplicationRepository<Employee, Integer> {
@@ -50,9 +48,5 @@ public interface EmplRepo extends ApplicationRepository<Employee, Integer> {
 
 //		public Page<T> findById(int id, Pageable pageable);
 		
-=======
 
-interface EmployeeRepo extends ApplicationRepository<Employee, Integer> {
->>>>>>> d292bf44e661625dd603eaf69c8432598a4095da:src/main/java/com/example/demo/employee/EmployeeRepo.java
-	
 }
