@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ndg.springdemo.common.GenericController;
 import com.ndg.springdemo.model.Employee;
 
+@CrossOrigin()
 @RequestMapping(EmployeeController.URI)
 @RestController
 public class EmployeeController extends GenericController<Employee, Integer> {
