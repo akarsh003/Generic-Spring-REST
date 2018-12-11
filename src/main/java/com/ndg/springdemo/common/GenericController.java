@@ -3,6 +3,8 @@ package com.ndg.springdemo.common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -12,7 +14,10 @@ import org.springframework.http.ResponseEntity;
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 
 
@@ -66,13 +71,31 @@ public abstract class GenericController<T, ID extends Serializable> {
         return created;
     }
 
-    protected T updateImpl(T oldObj, T newObj) {
-        BeanUtils.copyProperties(newObj, oldObj, "id");
+    protected T updateImpl(T oldObj, T newObj, boolean patch) {
+    	if(patch)
+    	{
+        BeanUtils.copyProperties(newObj, oldObj, getNullPropertyNames(newObj));
+    	}
+    	else {
+    		BeanUtils.copyProperties(newObj, oldObj, getNullPropertyNames(newObj));
+    	}
         T updated = this.repo.save(oldObj);
         return updated;
     }
 
+    public  String[] getNullPropertyNames (Object source) {
+        final BeanWrapper src = new BeanWrapperImpl(source);
+        java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
 
+        Set<String> emptyNames = new HashSet<String>();
+        for(java.beans.PropertyDescriptor pd : pds) {
+            Object srcValue = src.getPropertyValue(pd.getName());
+            if (srcValue == null) emptyNames.add(pd.getName());
+        }
+        String[] result = new String[emptyNames.size()];
+        return emptyNames.toArray(result);
+    }
+    
     protected boolean deleteImpl(ID id) {
         this.repo.deleteById(id);
         return true;

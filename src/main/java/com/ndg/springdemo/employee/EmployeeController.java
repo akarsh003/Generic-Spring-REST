@@ -48,7 +48,7 @@ public class EmployeeController extends GenericController<Employee, Integer> {
 		return super.respondToGet(id, super.getImpl(id));
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(method = RequestMethod.POST)
 	protected ResponseEntity<Employee> create(@RequestBody Employee employee) throws URISyntaxException {
 
 		if (employee.getId() != Employee.DEFAULT_ID) {
@@ -58,10 +58,10 @@ public class EmployeeController extends GenericController<Employee, Integer> {
 		return super.created(result.getId(), result);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	protected ResponseEntity<Employee> update(@PathVariable Integer id, @RequestBody Employee employee) {
 		return super.getImpl(id).map(oldEmployee -> {
-			Employee updatedEntity = super.updateImpl(oldEmployee, employee);
+			Employee updatedEntity = super.updateImpl(oldEmployee, employee, false);
 			return super.updated(id, updatedEntity);
 		}).orElse(super.updateNotFound(id));
 	}

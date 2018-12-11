@@ -1,6 +1,8 @@
 package com.ndg.springdemo.department;
 
+import java.lang.reflect.Field;
 import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,16 +56,11 @@ public class DepartmentController extends GenericController<Department, Integer>
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	protected ResponseEntity<DepartmentRecord> get(@PathVariable Integer id) {
 		Optional<Department> x = super.getImpl(id);
-
-		
 		Optional<DepartmentRecord> projected =  x.map(l->factory.createProjection(DepartmentRecord.class, l));
-
-
-		
 		return super.respondToGet(id, projected);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(method = RequestMethod.POST)
 	protected ResponseEntity<Department> create(@RequestBody Department department) throws URISyntaxException {
 		if (department.getDeptid() != Department.DEFAULT_DEPT_ID) {
 			return super.cannotCreateEntityWithKey();
@@ -71,14 +69,25 @@ public class DepartmentController extends GenericController<Department, Integer>
 		return super.created(result.getDeptid(), result);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public @ResponseBody ResponseEntity<Department> update(@PathVariable int id, @RequestBody Department department) {
 		return super.getImpl(id).map(oldDepartment -> {
-			Department updatedEntity = super.updateImpl(oldDepartment, department);
+			department.setDeptid(id);
+			Department updatedEntity = super.updateImpl(oldDepartment, department, false);			
 			return super.updated(id, updatedEntity);
 		}).orElse(super.updateNotFound(id));
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.PATCH )
+	public @ResponseBody ResponseEntity<Department> patch(@PathVariable int id,@RequestBody Department entity) {
+		return super.getImpl(id).map(oldDepartment -> {
+			entity.setDeptid(id);
+			Department updatedEntity = super.updateImpl(oldDepartment,entity, true);			
+			return super.updated(id, updatedEntity);
+			
+		}).orElse(super.updateNotFound(id));
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	protected ResponseEntity<Department> delete(@PathVariable Integer id) {
 		super.deleteImpl(id);
