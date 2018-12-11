@@ -19,7 +19,7 @@ class CriteriaParser {
 
     private static Map<String, Operator> ops;
 
-    private static Pattern SpecCriteraRegex = Pattern.compile("^(\\w+?)(" 
+    private static Pattern SpecCriteraRegex = Pattern.compile("^([\\w\\.]+?)(" 
     + String.join("|", SearchOperation.SIMPLE_OPERATION_SET) + ")(\\p{Punct}?)(\\w+?)(\\p{Punct}?)$");
 
     private enum Operator {
