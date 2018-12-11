@@ -12,7 +12,7 @@ public interface EmployeeRecord{
 	int getid();
 	String getname();
 
-	DepartmentRecord getdeptid();
+	DepartmentRecord getdept();
 	//
 	
 	String getSkill();
