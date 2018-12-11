@@ -39,18 +39,18 @@ public class Employee {
 	   @ManyToOne
 	   @JoinColumn(name="deptid")
 
-	   private Department deptid;
+	   private Department dept;
 	   
 
 	   
 		public float getSalary() {
 			return salary;
 		}
-		public Department getDeptid() {
-			return deptid;
+		public Department getDept() {
+			return dept;
 		}
-		public void setDeptid(Department deptid) {
-			this.deptid = deptid;
+		public void setDept(Department deptid) {
+			this.dept = deptid;
 		}
 		public void setSalary(float salary) {
 			this.salary = salary;
