@@ -16,8 +16,9 @@ public enum SearchOperation {
     public static final String LEFT_PARANTHESIS = "(";
 
     public static final String RIGHT_PARANTHESIS = ")";
-
+    
     public static SearchOperation getSimpleOperation(final char input) {
+    	
         switch (input) {
         case ':':
             return EQUALITY;

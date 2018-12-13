@@ -7,10 +7,16 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.ndg.springdemo.model.*;
-class GenericSpecificationBuilder<U> {
+class GenericSpecificationBuilder<U>{
 
     private final List<SpecSearchCriteria> params;
 
@@ -67,13 +73,15 @@ class GenericSpecificationBuilder<U> {
         return result;
     }
 
-    Specification<U> build(Deque<?> postFixedExprStack, Function<SpecSearchCriteria, Specification<U>> converter) {
+    
+	Specification<U> build(Deque<?> postFixedExprStack, Function<SpecSearchCriteria, Specification<U>> converter) throws BadRequestException {
 
         Deque<Specification<U>> specStack = new LinkedList<>();
 
         Collections.reverse((List<?>) postFixedExprStack);
 
         while (!postFixedExprStack.isEmpty()) {
+        	
             Object mayBeOperand = postFixedExprStack.pop();
 
             if (!(mayBeOperand instanceof String)) {
@@ -90,8 +98,34 @@ class GenericSpecificationBuilder<U> {
             }
 
         }
-        return specStack.pop();
+        
+//        	System.out.println("ERROR bad request");
+//        	return specStack.p);
 
+        		if(specStack.isEmpty()) 
+				throw new BadRequestException();
+
+				// TODO Auto-generated catch block
+    	        return specStack.pop();
+
+			}
+//        	cannotCreateEntityWithKey();
+        	
+//            response.setStatus( HttpServletResponse.SC_BAD_REQUEST  );
+
+//        	 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+//        return specStack.pop();
+
+    
+//	protected ResponseEntity<Object> cannotCreateEntityWithKey() {
+//		System.out.print("Bad request");
+//       new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		
+//		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//       request.abort();
+//         ResponseEntity.badRequest().header("Failure", "A new entity cannot already have an ID").body(null);
+       
     }
 
-}
+

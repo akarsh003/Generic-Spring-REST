@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ndg.springdemo.common.ApplicationRepository;
+import com.ndg.springdemo.common.BadRequestException;
 import com.ndg.springdemo.common.GenericController;
 import com.ndg.springdemo.model.Department;
 
@@ -44,7 +45,7 @@ public class DepartmentController extends GenericController<Department, Integer>
 
 	@RequestMapping
 	public ResponseEntity<Page<DepartmentRecord>> all(Pageable pageable,
-			@RequestParam(value = "search", required = false) String search) {
+			@RequestParam(value = "search", required = false) String search) throws BadRequestException {
 
 		Page<Department> x = super.allImpl(pageable, search);
 

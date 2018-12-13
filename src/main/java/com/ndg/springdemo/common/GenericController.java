@@ -1,5 +1,6 @@
 package com.ndg.springdemo.common;
 
+import org.hibernate.result.Output;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -38,21 +39,28 @@ public abstract class GenericController<T, ID extends Serializable> {
         return log;
     }
 
-    private Specification<T> resolveSpecificationFromInfixExpr(String searchParameters) {
+    private Specification<T> resolveSpecificationFromInfixExpr(String searchParameters) throws BadRequestException {
+    	
         CriteriaParser parser = new CriteriaParser();
         GenericSpecificationBuilder<T> specBuilder = new GenericSpecificationBuilder<>();
         Function<SpecSearchCriteria, Specification<T>> specificationFactory = getSpecificationObject();
         return specBuilder.build(parser.parse(searchParameters), specificationFactory);
+        
     }
 
     protected Function<SpecSearchCriteria, Specification<T>> getSpecificationObject() {
         return BaseGenericSpecification::new;
     }
 
-    protected Page<T> allImpl(Pageable pageable, String search) {
+    protected Page<T> allImpl(Pageable pageable, String search) throws BadRequestException {
+    	
+
     	
         if (search != null && !search.isEmpty()) {
+        	
+        	
             Specification<T> spec = resolveSpecificationFromInfixExpr(search);
+            
             Page<T> data = repo.findAll(spec, pageable);
             return data;
         } else {

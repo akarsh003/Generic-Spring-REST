@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ndg.springdemo.common.BadRequestException;
 import com.ndg.springdemo.common.GenericController;
 import com.ndg.springdemo.model.Employee;
 
@@ -35,8 +36,7 @@ public class EmployeeController extends GenericController<Employee, Integer> {
 	private ProjectionFactory factory;
 
 	@RequestMapping
-	public ResponseEntity<Page<EmployeeRecord>> all(Pageable pageable,
-			@RequestParam(value = "search", required = false) String search) {
+	public ResponseEntity<Page<EmployeeRecord>> all(Pageable pageable, @RequestParam(value = "search", required = false) String search) throws BadRequestException {
 
 		Page<Employee> x = super.allImpl(pageable, search);
 		Page<EmployeeRecord> projected = x.map(l -> factory.createProjection(EmployeeRecord.class, l));

@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 //import com.google.common.base.Joiner;
 
 //import com.example.demo.model.SpecSearchCrieteria;
@@ -49,31 +52,44 @@ class CriteriaParser {
 
         Deque<Object> output = new LinkedList<>();
         Deque<String> stack = new LinkedList<>();
-
         Arrays.stream(searchParam.split("\\s+")).forEach(token -> {
+        	
             if (ops.containsKey(token)) {
+            	
+            	System.out.println("Here1");
+
                 while (!stack.isEmpty() && isHigerPrecedenceOperator(token, stack.peek()))
                     output.push(stack.pop()
                         .equalsIgnoreCase(SearchOperation.OR_OPERATOR) ? SearchOperation.OR_OPERATOR : SearchOperation.AND_OPERATOR);
                 stack.push(token.equalsIgnoreCase(SearchOperation.OR_OPERATOR) ? SearchOperation.OR_OPERATOR : SearchOperation.AND_OPERATOR);
-            } else if (token.equals(SearchOperation.LEFT_PARANTHESIS)) {
+
+            } 
+            else if (token.equals(SearchOperation.LEFT_PARANTHESIS)) {
+
                 stack.push(SearchOperation.LEFT_PARANTHESIS);
-            } else if (token.equals(SearchOperation.RIGHT_PARANTHESIS)) {
-                while (!stack.peek()
-                    .equals(SearchOperation.LEFT_PARANTHESIS))
+            
+            }
+            else if (token.equals(SearchOperation.RIGHT_PARANTHESIS)) {
+
+            	
+                while (!stack.peek().equals(SearchOperation.LEFT_PARANTHESIS))
+                	
                     output.push(stack.pop());
+                
                 stack.pop();
+                
             }
             else {
 
                 Matcher matcher = SpecCriteraRegex.matcher(token);
                 while (matcher.find()) {
                     output.push(new SpecSearchCriteria(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4), matcher.group(5)));
+                
                 }
             }
         });
 
-        while (!stack.isEmpty())
+        while (!stack.isEmpty()) 
             output.push(stack.pop());
 
         return output;

@@ -36,6 +36,7 @@ public class BaseGenericSpecification<T> implements Specification<T> {
     public Predicate toPredicate(final Root<T> root, final CriteriaQuery<?> query, final CriteriaBuilder builder) {
     	
         switch (criteria.getOperation()) {
+        
             case EQUALITY:
                 return builder.equal(getPath(root, criteria.getKey()), criteria.getValue());
             case NEGATION:
