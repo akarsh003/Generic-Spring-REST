@@ -38,6 +38,8 @@ public abstract class GenericController<T, ID extends Serializable> {
     protected Logger getLogger() {
         return log;
     }
+    
+    
 
     private Specification<T> resolveSpecificationFromInfixExpr(String searchParameters) throws BadRequestException {
     	
