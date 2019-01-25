@@ -19,10 +19,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@SuppressWarnings("serial")
 	Map<String, Entry<String, String[]>> usernames = new HashMap<String, Entry<String, String[]>>() {
 		{
-			put("manogna", new SimpleEntry<>("Manogna Lakshman", new String[] { "Leadership" }));
-			put("mythri", new SimpleEntry<>("Mythri MJ", new String[] { "QR" }));
-			put("akarsha", new SimpleEntry<>("Akarsha KR", new String[] { "Processor" }));
+			put("manogna", new SimpleEntry<>("Manogna Lakshman", new String[] { "Leadership","QR" }));
+			put("mythri", new SimpleEntry<>("Mythri MJ", new String[] { "QR","Processor" }));
+			put("akarsha", new SimpleEntry<>("Akarsha KR", new String[] { "Processor","Leadership" }));
 			put("ram", new SimpleEntry<>("Ramanathan", new String[] { "QR" }));
+			put("then", new SimpleEntry<>("Thenmozhi", new String[] { "Processor" }));
+			put("srikesh", new SimpleEntry<>("Srikesh Nagoji", new String[] { "Leadership" }));
 		}
 	};
 
